@@ -102,4 +102,5 @@ Os endpoints só irão funcionar se o User estiver autenticado.
 O únicos endpoints que funcionam sem autenticação é o Criar usuario User e Criar usuario Admin.
 
 
-By: Wesley Fernando Simonini
+💬 Contato
+Desenvolvido por Wesley Fernando Simonini
