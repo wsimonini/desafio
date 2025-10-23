@@ -6,7 +6,6 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import io.github.daylanbueno.authapi.dtos.AuthDto;
 import io.github.daylanbueno.authapi.dtos.TokenResponseDto;
-import io.github.daylanbueno.authapi.infra.exceptions.BusinessException;
 import io.github.daylanbueno.authapi.infra.exceptions.UnauthorizedException;
 import io.github.daylanbueno.authapi.models.Usuario;
 import io.github.daylanbueno.authapi.respositories.UsuarioRepository;

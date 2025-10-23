@@ -3,7 +3,6 @@ package io.github.daylanbueno.authapi.controllers;
 import io.github.daylanbueno.authapi.dtos.AgenciaDTO;
 import io.github.daylanbueno.authapi.models.Agencia;
 import org.springframework.web.bind.annotation.*;
-import io.github.daylanbueno.authapi.respositories.AgenciaRepository;
 import io.github.daylanbueno.authapi.services.AgenciaService;
 
 import java.util.List;
