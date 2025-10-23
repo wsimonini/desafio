@@ -11,11 +11,49 @@ API REST em **Java 17 + Spring Boot** com autenticação **OAuth2**, cache de ag
 - Spring Data JPA  
 - Spring Security + OAuth2 Resource Server  
 - Banco H2 (em memória, pode ser trocado por MySQL/PostgreSQL)  
-- Cache Caffeine  
+- Cache Caffeine
+- Lombok para reduzir boilerplate
 
 ---
 
-## 🚀 Como Rodar
+📦 Como Clonar o Projeto
+git clone https://github.com/seu-usuario/seu-projeto.git
+
+⚙️ Configuração do Ambiente
+1️⃣ Configurar a porta da aplicação
+
+No arquivo src/main/resources/application.properties, você pode definir a porta:
+server.port=8080
+
+Eu deixei: server.port=8081
+
+▶️ Como Rodar o Projeto
+✅ Opção 1: Pelo IntelliJ IDEA
+
+Abra o projeto no IntelliJ.
+
+Espere o Maven baixar as dependências.
+
+Vá até a classe principal (Application.java) com o método main.
+
+Clique com o botão direito → Run 'Application.main()'.
+
+✅ Opção 2: Via terminal (Maven)
+
+mvn clean install
+mvn spring-boot:run
+
+🌐 Testar a Aplicação
+
+Por padrão, a API ficará acessível em:
+http://localhost:8081
+
+Se você tiver endpoints REST, pode testá-los com ferramentas como:
+
+Postman
+Insomnia
+
+🌐 Testando a API
 
 Importar a collection para o Postman que está dentro de resources.
 
@@ -62,3 +100,6 @@ http://localhost:8081/desafio/distancia?posX=-5&posY=10
 
 Os endpoints só irão funcionar se o User estiver autenticado.
 O únicos endpoints que funcionam sem autenticação é o Criar usuario User e Criar usuario Admin.
+
+
+By: Wesley Fernando Simonini
