@@ -11,6 +11,7 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +19,7 @@ public class AgenciaServiceImpl implements AgenciaService {
 
     private final AgenciaRepository agenciaRepository;
     private final Cache<String, List<Agencia>> cache;
+    private final AtomicInteger accessCount = new AtomicInteger(0);
 
     public AgenciaServiceImpl(AgenciaRepository agenciaRepository) {
         this.agenciaRepository = agenciaRepository;
@@ -30,14 +32,25 @@ public class AgenciaServiceImpl implements AgenciaService {
     public Agencia cadastrarAgencia(Agencia agencia) {
         Agencia saved = agenciaRepository.save(agencia);
         cache.invalidate("agencias"); // Limpa cache ao cadastrar nova agência
+        accessCount.set(0); // Reinicia contagem após atualização
         return saved;
     }
 
     @Override
     public List<Map<String, Double>> consultarDistancias(double usuarioX, double usuarioY) {
+        // Incrementa o contador de acessos
+        int currentAccess = accessCount.incrementAndGet();
+
+        // Se já consultou 10 vezes, força renovação do cache
+        if (currentAccess >= 10) {
+            cache.invalidate("agencias");
+            accessCount.set(0);
+        }
+
+        // Obtém lista do cache (ou busca novamente no banco)
         List<Agencia> agencias = cache.get("agencias", key -> agenciaRepository.findAll());
 
-        // Calcula distância
+        // Calcula distância entre o usuário e cada agência
         return agencias.stream()
                 .map(a -> Map.of(
                         a.getNome() != null ? a.getNome() : "AGENCIA_" + a.getId(),
